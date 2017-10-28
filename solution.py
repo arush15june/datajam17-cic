@@ -6,4 +6,8 @@ import matplotlib.pyplot as plt
 """
 Datasets
 """
-training_set = pandas.from_csv("")
+training_set_DF = pandas.read_csv("datasets/training_set.csv")
+test_set_DF = pandas.read_csv("datasets/testing_set.csv")
+
+print(training_set_DF)
+print(test_set_DF)
