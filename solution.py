@@ -79,8 +79,8 @@ modelMLP = Pipeline(steps=[('MLP',  MLPClassifier(alpha=1))])
 modelGNB = Pipeline(steps=[('GNB',GaussianNB())])
 modelRF = Pipeline(steps=[('RandomForest',RandomForestClassifier(max_depth=2, random_state=0))])
 modelQDA = Pipeline(steps=[('QDA',QuadraticDiscriminantAnalysis())])
-modelDT = Pipeline(steps=[('DT', DecisionTreeClassifier(max_depth=None, max_features='sqrt', splitter='best', min_samples_split=2 ,min_samples_leaf=1))])
-
+# modelDT = Pipeline(steps=[('DT', DecisionTreeClassifier(max_depth=None, max_features='sqrt', splitter='best', min_samples_split=2 ,min_samples_leaf=1))])
+modelDT = Pipeline(steps=[('DT', DecisionTreeClassifier(max_depth=6, max_features=None, min_samples_leaf=int(0.03*len(test_DF))))])
 """
 CV Scores
 """
@@ -124,3 +124,5 @@ print(preds)
 
 submissions_DF = pd.DataFrame({'genre' : leGenre.inverse_transform(preds), 'id': test_DF['id']})
 submissions_DF[['id','genre']].to_csv("submission.csv", index=False)
+
+print(submissions_DF['genre'].value_counts())
